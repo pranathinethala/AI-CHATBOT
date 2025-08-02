@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block styles %}
+<style>
+  body {
+    background: linear-gradient(to right, #e0eafc, #cfdef3);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  .card {
+    background-color: #ffffff;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    border-radius: 14px;
+    max-width: 500px;
+    width: 100%;
+    overflow: hidden;
+    animation: slide-in 0.5s ease-out;
+  }
+
+  .card-header {
+    background-color: #4a90e2;
+    color: #fff;
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+    padding: 25px 20px;
+  }
+
+  .card-subtitle {
+    background-color: #e7f0ff;
+    color: #333;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    padding: 10px 20px;
+  }
+
+  .card-body {
+    padding: 40px;
+  }
+
+  .form-group {
+    margin-bottom: 25px;
+  }
+
+  label {
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  input[type=text], input[type=password] {
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    padding: 14px;
+    font-size: 16px;
+    width: 100%;
+    transition: border-color 0.3s;
+  }
+
+  input[type=text]:focus,
+  input[type=password]:focus {
+    border-color: #4a90e2;
+    outline: none;
+  }
+
+  button[type=submit] {
+    background-color: #4a90e2;
+    color: white;
+    font-size: 17px;
+    font-weight: 600;
+    padding: 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+  }
+
+  button[type=submit]:hover {
+    background-color: #357ABD;
+  }
+
+  .register-link {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .register-link a {
+    color: #4a90e2;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .register-link a:hover {
+    text-decoration: underline;
+  }
+
+  .alert-danger {
+    background-color: #fdecea;
+    color: #b71c1c;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #f5c2c7;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+
+  @keyframes slide-in {
+    from {
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="login-container">
+  <div class="card">
+    <div class="card-header">Login to Tanya</div>
+    <div class="card-subtitle">Your friendly AI companion ✨</div>
+    <div class="card-body">
+      {% if error_message %}
+        <div class="alert alert-danger" role="alert">{{ error_message }}</div>
+      {% endif %}
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" class="form-control" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        <button type="submit">Login</button>
+      </form>
+      <div class="register-link">
+        Don't have an account? <a href="{% url 'register' %}">Register here</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
