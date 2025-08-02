@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 
 client = OpenAI(
     base_url="https://openrouter.ai/api/v1",
-    api_key="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",  # Use env var in production
+    api_key="api-key",  # Use env var in production
 )
 
 def ask_openai(message):
